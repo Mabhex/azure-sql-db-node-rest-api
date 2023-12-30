@@ -3,13 +3,14 @@
 set -euo pipefail
 
 # Make sure these values are correct for your environment
-resourceGroup="dm-api-04"
-appName="dm-api-04"
-storageName="dmapi04"
-location="WestUS2" 
+resourceGroup="SAN-Base-Infrastructure"
+appName="ZoZTwilioCSharp"
+storageName="sasanstore"
+location="southafricanorth" 
 
 # Change this if you are using your own github repository
-gitSource="https://github.com/Azure-Samples/azure-sql-db-node-rest-api.git"
+gitSource="https://github.com/Mabhex/azure-sql-db-node-rest-api.git"
+           
 
 # Check that local.settings.json exists
 settingsFile="./local.settings.json"
@@ -18,27 +19,27 @@ if ! [ -f $settingsFile ]; then
     exit
 fi
 
-echo "Creating Resource Group...";
-az group create \
-    -n $resourceGroup \
-    -l $location
+# echo "Creating Resource Group...";
+# az group create \
+#     -n $resourceGroup \
+#     -l $location
 
-echo "Creating Application Insight..."
-az resource create \
-    -g $resourceGroup \
-    -n $appName-ai \
-    --resource-type "Microsoft.Insights/components" \
-    --properties '{"Application_Type":"web"}'
+# echo "Creating Application Insight..."
+# az resource create \
+#     -g $resourceGroup \
+#     -n $appName-ai \
+#     --resource-type "Microsoft.Insights/components" \
+#     --properties '{"Application_Type":"web"}'
 
-echo "Reading Application Insight Key..."
-aikey=`az resource show -g $resourceGroup -n $appName-ai --resource-type "Microsoft.Insights/components" --query properties.InstrumentationKey -o tsv`
+# echo "Reading Application Insight Key..."
+# aikey=`az resource show -g $resourceGroup -n $appName-ai --resource-type "Microsoft.Insights/components" --query properties.InstrumentationKey -o tsv`
 
-echo "Creating Storage Account...";
-az storage account create \
-    -g $resourceGroup \
-    -l $location \
-    -n $storageName \
-    --sku Standard_LRS
+# echo "Creating Storage Account...";
+# az storage account create \
+#     -g $resourceGroup \
+#     -l $location \
+#     -n $storageName \
+#     --sku Standard_LRS
 
 echo "Creating Function App...";
 az functionapp create \
