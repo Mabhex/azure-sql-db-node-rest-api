@@ -7,6 +7,6 @@
   },
   "author": "",
   "dependencies": {
-    "tedious": "^9.0.1"
+    "tedious": "^16.6.1"
   }
 }
